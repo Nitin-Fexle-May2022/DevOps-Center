@@ -6,9 +6,9 @@ public class Cloudinary_Services {
         try{ 
             conVer = Cloudinary_Queries.getContentVersionData(conId);
             // Create a new HttpRequest using the Cloudinary_ResponeParser class
-            HttpRequest request = Cloudinary_RequestBuilder.uploadResource(conVer); 
-            Http http = new Http();
-            HttpResponse response = http.send(request);
+            System.HttpRequest request = Cloudinary_RequestBuilder.uploadResource(conVer); 
+            System.Http http = new System.Http();
+            System.HttpResponse response = http.send(request);
             // Pass the response body to Cloudinary_ResponeParser to parse the JSON
             return Cloudinary_ResponeParser.parseFileResponse(conVer, response);
         }
@@ -23,7 +23,7 @@ public class Cloudinary_Services {
          try {
              // Create a new HttpRequest using the Cloudnary_RequestBuilder class
              conVer = Cloudinary_Queries.getContentVersionData(conId);
-             HttpRequest request = Cloudinary_RequestBuilder.downloadResource(conVer, responseWrapper);   
+             System.HttpRequest request = Cloudinary_RequestBuilder.downloadResource(conVer, responseWrapper);   
              // Send the request using an Http object and get the response
              HttpResponse response = new Http().send(request);
              if (response.getStatusCode() == 200) {
@@ -39,7 +39,7 @@ public class Cloudinary_Services {
     
     public static void deleteResource(List<String> publicIds){
         try {
-            HttpRequest request = Cloudinary_RequestBuilder.deleteResource(publicIds);   
+            System.HttpRequest request = Cloudinary_RequestBuilder.deleteResource(publicIds);   
             // Send the request using an Http object and get the response
             System.debug(request);
             HttpResponse response = new Http().send(request);

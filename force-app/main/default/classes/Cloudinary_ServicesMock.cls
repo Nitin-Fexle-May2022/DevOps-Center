@@ -1,8 +1,8 @@
 global class Cloudinary_ServicesMock implements HttpCalloutMock {
     
-    global HTTPResponse respond(HTTPRequest req) {
+    global HTTPResponse respond(System.HTTPRequest req) {
         
-        HttpResponse response = new HttpResponse();
+        System.HttpResponse response = new System.HttpResponse();
         response.setHeader('Content-Type', 'application/json');
         response.setStatusCode(200);
 
