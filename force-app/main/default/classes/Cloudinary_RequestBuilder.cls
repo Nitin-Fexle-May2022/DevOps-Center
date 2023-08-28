@@ -1,5 +1,6 @@
 public class Cloudinary_RequestBuilder {
-
+    
+    //Method to build request 
     public static HttpRequest buildRequest(String endpointName, String methodType, String body) {
         Cloudinary_Master_Settings__c cloudinarySettings = Cloudinary_Master_Settings__c.getOrgDefaults();
         String endPoint = cloudinarySettings.End_Point__c + cloudinarySettings.Cloud_Name__c + Cloudinary_Queries.getMehodNameByName(endpointName);
