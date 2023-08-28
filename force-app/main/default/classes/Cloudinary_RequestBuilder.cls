@@ -7,7 +7,11 @@ public class Cloudinary_RequestBuilder {
         req.setEndpoint(endPoint);
         req.setMethod(methodType);
         if(methodType == 'DELETE') {
-          req = getAuthorization(req);
+            String username = cloudinarySettings.API_Key__c;
+            String password = cloudinarySettings.API_Secret__c;
+            Blob headerValue = Blob.valueOf(username + ':' + password);
+            String authorizationHeader = 'BASIC ' +EncodingUtil.base64Encode(headerValue);
+            req.setHeader('Authorization', authorizationHeader); 
         }
         req.setHeader('Content-Type', 'application/json');
         if (body != null) {
@@ -39,17 +43,5 @@ public class Cloudinary_RequestBuilder {
             Cloudinary_Constants.METHOD_TYPE_DELETE,
             Cloudinary_JSONBodyBuilder.createJSONForDeleteResource(publicIds)
         );
-    }
-    
-    public static HttpRequest getAuthorization(HttpRequest req) {
-        
-        Cloudinary_Master_Settings__c cloudinarySettings = Cloudinary_Master_Settings__c.getOrgDefaults();
-        String username = cloudinarySettings.API_Key__c;
-        String password = cloudinarySettings.API_Secret__c;
-        Blob headerValue = Blob.valueOf(username + ':' + password);
-        String authorizationHeader = 'BASIC ' +EncodingUtil.base64Encode(headerValue);
-        req.setHeader('Authorization', authorizationHeader); 
-        
-        return req;
     }
 }
